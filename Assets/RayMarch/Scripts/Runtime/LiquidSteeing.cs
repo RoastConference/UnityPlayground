@@ -39,10 +39,8 @@ public class LiquidSteeing : MonoBehaviour
         this.transform.rotation = Quaternion.Euler(0, 0, 90.0f * sinx * flag);
          
         if (Mathf.Abs(m_planeNormal.x) > 1) shakeSpeed = -shakeSpeed;
-        //Debug.Log(m_planeNormal.x);
     }
 
-    // Update is called once per frame
     void Update()
     {
         m_renderer.sharedMaterial.SetVector("_PlaneNormal", m_planeNormal);

@@ -1,12 +1,12 @@
 ﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
-Shader "UnityToy/RayMarch/Liquid"
+Shader "RayMarch/Liquid"
 {
     Properties
     {
         _Radius("Radius", Float) = 1
         //_Centre("Center", Vector) = (0,0,0,0)
-        _Color("Liquid Color", Color) = (0.3,0.4,0.7,0.4)
+        _Color("Liquid Color", Color) = (0.3, 0.4, 0.7, 0.4)
         //_PlaneNormal("Plane Normal", Vector) = (0, 1, 0, 0)
     }
     SubShader
@@ -18,7 +18,7 @@ Shader "UnityToy/RayMarch/Liquid"
         Pass
         {
             ZWrite On
-            ColorMask 0  //用于设置颜色通道的写掩码,0表示不写入任何通道
+            ColorMask 0
         }
 
         Pass
@@ -63,7 +63,7 @@ Shader "UnityToy/RayMarch/Liquid"
 
             float4 raymarchHit (float3 position, float3 direction)
             {
-                float4 color =  float4(0.5, 0.4, 0.9, 0);
+                float4 color =  _Color;
                 for (int i = 0; i < STEPS; i++)
                 {
                     if ( sphereHit(position) && UnderPlane(position))
@@ -90,7 +90,7 @@ Shader "UnityToy/RayMarch/Liquid"
                 //     col =  _Color;
                 // else
                 //     col = fixed4(0,0,0,0);
-                clip(col.a - 0.1);
+                clip(col.a - 0.5);
                 return col;
             }
             ENDCG
